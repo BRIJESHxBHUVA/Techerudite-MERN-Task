@@ -5,7 +5,7 @@ import productRoute from "./router/productRoutes.js";
 import categoryRoute from "./router/categoryRoutes.js";
 
 const app = express();
-app.use(cors({origin: 'http://localhost:5173'}));
+app.use(cors({origin: 'http://localhost:3000'}));
 
 const PORT = process.env.PORT || 5000;
 
