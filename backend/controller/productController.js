@@ -3,18 +3,37 @@ import Product from "../models/productSchema.js";
 export const createProduct = async (req, res) => {
   try {
     const { name, description, quantity, categories } = req.body;
-    if (!name || !quantity || !categories) {
+    const trimmedName = typeof name === "string" ? name.trim() : "";
+    const trimmedDescription = typeof description === "string" ? description.trim() : "";
+    const parsedQuantity = Number(quantity);
+    const categoryList = Array.isArray(categories) ? categories : [];
+
+    if (!trimmedName) {
       return res.status(400).json({
         success: false,
-        message: "Name, quantity, and categories are required.",
+        message: "Product name is required.",
+      });
+    }
+
+    if (!parsedQuantity || parsedQuantity <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Quantity must be greater than 0.",
+      });
+    }
+
+    if (!categoryList.length) {
+      return res.status(400).json({
+        success: false,
+        message: "Please select at least one category.",
       });
     }
 
     const insertedProduct = await Product.create({
-      name,
-      description,
-      quantity,
-      categories,
+      name: trimmedName,
+      description: trimmedDescription,
+      quantity: parsedQuantity,
+      categories: categoryList,
     });
 
     return res.status(201).json({
