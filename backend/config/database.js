@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-mongoose.connect("mongodb://bhuvabrijesh14_db_user:010tg0uV9eIQ4YKZ@ac-3cjdczi-shard-00-00.vbmndwq.mongodb.net:27017,ac-3cjdczi-shard-00-01.vbmndwq.mongodb.net:27017,ac-3cjdczi-shard-00-02.vbmndwq.mongodb.net:27017/Techerudite-task-db?ssl=true&replicaSet=atlas-m8amlo-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0", {
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URI, {
   serverSelectionTimeoutMS: 10000,
 });
 

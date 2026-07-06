@@ -42,7 +42,7 @@ const seedProducts = async () => {
     });
 
     await Product.insertMany(productsWithCategories);
-    console.log(`✓ ${productsWithCategories.length} products seeded successfully`);
+    console.log(`${productsWithCategories.length} products seeded successfully`);
     
     await mongoose.disconnect();
     process.exit(0);
